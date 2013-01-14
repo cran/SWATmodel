@@ -1,17 +1,16 @@
-#build_swat_basic(dirname="junkTB",iyr="1990",nbyr=13,flowgage$area,flowgage$elev,flowgage$declat,flowgage$declon,hist_wx)
 # Function for example
 # 
 #
-build_swat_basic<-function(dirname,iyr,nbyr,wsarea,elev,declat,declon,hist_wx){
+build_swat_basic<-function(dirname,iyr=2000,nbyr=2,wsarea=45,elev=500,declat=45.7,declon=-76,hist_wx=NULL){
 #
 # Removing the global variables Note. Delete the first line when past supported versions are past v15.1
 #
 swat_general<- NULL; rm(swat_general);  # A code dummy
 # Correct way to let code know about global variables post 2.15.1
-if(getRversion() >= "2.15.1") {
-   globalVariables(c("swat_general"))
-} 
-
+#if(getRversion() >= "2.15.1") {
+#   globalVariables(c("swat_general"))
+#} 
+#
 data(swat_general)
 dir.create(dirname)
 setwd(dirname)
@@ -20,17 +19,23 @@ for (file in names(swat_general)) {
     cat(unlist(swat_general[file]), file = file, sep = "\n")
 }
 
-tmp_head=paste("Tmp\nLati Not Used\nLong Not Used\nElev        ",sprintf("%5.0f\n",elev),sep="")
-pcp_head=paste("Pcp\nLati Not Used\nLong Not Used\nElev        ",sprintf("%5.0f\n",elev),sep="")
-cat(tmp_head,sprintf("%s%005.1f%005.1f\n",format(hist_wx$DATE,"%Y%j"),hist_wx$TMX,hist_wx$TMN),file="tmp.tmp",sep="")
-cat(pcp_head,sprintf("%s%005.1f\n",format(hist_wx$DATE,"%Y%j"),hist_wx$PRECIP),file="pcp.pcp",sep="")
+if (length(hist_wx) > 2) {
+  tmp_head=paste("Tmp\nLati Not Used\nLong Not Used\nElev        ",sprintf("%5.0f\n",elev),sep="")
+  pcp_head=paste("Pcp\nLati Not Used\nLong Not Used\nElev        ",sprintf("%5.0f\n",elev),sep="")
+  cat(tmp_head,sprintf("%s%005.1f%005.1f\n",format(hist_wx$DATE,"%Y%j"),hist_wx$TMX,hist_wx$TMN),file="tmp.tmp",sep="")
+  cat(pcp_head,sprintf("%s%005.1f\n",format(hist_wx$DATE,"%Y%j"),hist_wx$PRECIP),file="pcp.pcp",sep="")
+}
 
 #
 # Setting up the filecio file
 #
 filecio=readLines("file.cio")
-filecio=sub("pcp1\\.pcp","pcp\\.pcp",filecio)
-filecio=sub("tmp1\\.tmp","tmp\\.tmp",filecio)
+
+if (length(hist_wx) > 2) {
+  filecio=sub("pcp1\\.pcp","pcp\\.pcp",filecio)
+  filecio=sub("tmp1\\.tmp","tmp\\.tmp",filecio)
+}
+
 filecio=sub("\\d\\d\\d\\d(    \\| IYR)",paste(iyr,"\\1",sep=""),filecio)
 substr=sprintf("      %10d    | NBYR",nbyr)
 filecio=sub("^.*\\| NBYR",substr,filecio,perl=T)

@@ -8,7 +8,18 @@ This runs the SWAT2009 executable in the current directory.
 This function runs the SWAT2009 executable in the current directory.
 }
 \usage{
-runSWAT2005()
+runSWAT2009(hist_wx,elev,rch)
+}
+\arguments{
+  \item{hist_wx}{
+Describe \code{hist_wx}
+}
+  \item{elev}{
+Describe \code{elev}
+}
+  \item{rch}{
+Describe \code{rch}
+}
 }
 \author{
 Daniel R. Fuka
