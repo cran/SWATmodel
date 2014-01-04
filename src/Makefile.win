@@ -1,15 +1,18 @@
 include $(R_HOME)/etc$(R_ARCH)/Makeconf
 #-*- Makefile -*-
 #
-DIRS	= SWAT2005 SWAT2009
+DIRS	= SWAT2005 SWAT2009 SWAT2012
 MFLAGS	= -f Makefile.win
-all: swat05 swat09
+all: swat05 swat09 swat12
 
 swat05:
 	cd SWAT2005 && $(MAKE) $(MFLAGS)
 
 swat09:
 	cd SWAT2009 && $(MAKE) $(MFLAGS)
+
+swat12:
+	cd SWAT2012 && $(MAKE) $(MFLAGS)
 
 clean :
 	-rm -f $(EXE) $(OBJS) $(OBJLIBS)

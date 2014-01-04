@@ -11,7 +11,8 @@ swat_general<- NULL; rm(swat_general);  # A code dummy
 #   globalVariables(c("swat_general"))
 #} 
 #
-data(swat_general)
+#data(swat_general)
+load(paste(path.package("SWATmodel"), "data/swat_general.rda", sep = "/"))
 dir.create(dirname)
 setwd(dirname)
 for (file in names(swat_general)) {

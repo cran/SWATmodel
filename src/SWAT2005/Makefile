@@ -98,7 +98,7 @@ OBJS =	addh.o albedo.o allocate_parms.o alph.o analyse.o anfert.o apex_day.o \
 all: $(PROG)
 
 $(PROG): $(OBJS)
-	$(FC) $(FCFLAGS) -o $@ $(OBJS) 
+	$(FC) -o $@ $(OBJS) 
 
 clean:
 	rm -f $(PROG) $(OBJS) *.mod

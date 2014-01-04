@@ -1,5 +1,5 @@
 Package: SWATmodel
-Version: 0.5.7
+Version: 0.5.9
 Title: A multi-OS implementation of the TAMU SWAT model.
 Author: Fuka, DR, Walter, MT, Steenhuis, TS, and Easton, ZM
 Maintainer: Daniel Fuka <drf28@cornell.edu>
@@ -9,5 +9,6 @@ Description: The Soil and Water Assessment Tool is a river basin or
         USDA-ARS.
 License: GPL-2
 Repository: CRAN
-Date/Publication: 2013-01-16 08:19:08
-Packaged: 2013-01-16 03:50:06 UTC; dan
+Date/Publication: 2014-01-04 09:11:22
+Packaged: 2014-01-04 08:01:49 UTC; ripley
+NeedsCompilation: yes
